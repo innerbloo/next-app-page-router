@@ -25,5 +25,9 @@
 
 .footer {
     padding: 100px 0;
+}
+
+.footer > a {
     color: gray;
+    text-decoration: none;
 }

@@ -14,7 +14,11 @@ export default function GlobalLayout({ children }: Props) {
                 <Link href={'/'}>📚 ONEBITE BOOKS</Link>
             </header>
             <main className={style.main}>{children}</main>
-            <footer className={style.footer}>제작 @innerbloo</footer>
+            <footer className={style.footer}>
+                <a href="https://github.com/innerbloo" target="_blank">
+                    제작 @innerbloo
+                </a>
+            </footer>
         </div>
     );
 }
