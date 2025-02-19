@@ -1,8 +1,4 @@
-import {
-    GetServerSidePropsContext,
-    GetStaticPropsContext,
-    InferGetServerSidePropsType,
-} from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -10,30 +6,6 @@ import BookItem from '@/components/book-item';
 import SearchableLayout from '@/components/searchable-layout';
 import fetchBooks from '@/lib/fetch-books';
 import { BookData } from '@/types';
-
-// export const getServerSideProps = async (
-//     context: GetServerSidePropsContext,
-// ) => {
-//     const q = context.query.q;
-//     const books = await fetchBooks(q as string);
-//
-//     return {
-//         props: {
-//             books,
-//         },
-//     };
-// };
-
-// export const getStaticProps = async (context: GetStaticPropsContext) => {
-//     const q = context.query.q;
-//     const books = await fetchBooks(q as string);
-//
-//     return {
-//         props: {
-//             books,
-//         },
-//     };
-// };
 
 export default function Search() {
     const [books, setBooks] = useState<BookData[]>([]);
@@ -53,7 +25,20 @@ export default function Search() {
     }, [q]);
 
     return (
-        <div>{books?.map((book) => <BookItem key={book.id} {...book} />)}</div>
+        <>
+            <Head>
+                <title>한입북스 - {q}</title>
+                <meta property="og:image" content="/thumbnail.png" />
+                <meta property="og:title" content={`한입북스 - ${q}`} />
+                <meta
+                    property="og:description"
+                    content="한입북스에 등록된 도서들을 만나보세요."
+                />
+            </Head>
+            <div>
+                {books?.map((book) => <BookItem key={book.id} {...book} />)}
+            </div>
+        </>
     );
 }
 
